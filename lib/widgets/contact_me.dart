@@ -7,60 +7,29 @@ class ContactMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    //final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Container(
-      height: 545,
-      padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+      //color: Colors.amber[200],
       width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      padding: width < 900
+          ? const EdgeInsets.fromLTRB(0, 20, 0, 20)
+          : const EdgeInsets.fromLTRB(0, 50, 0, 50),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        //mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
-            width: width * 0.50,
-            padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+            width: width < 900 ? width * 0.8 : width * 0.50,
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             decoration: BoxDecoration(
               color: const Color(0xff88efe0),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Column(
-              children: [
-                const Text(
-                  "Get in touch!",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    ContactMeTile(
-                      data: "+91 8287505276",
-                      icon: FontAwesomeIcons.phone,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    ContactMeTile(
-                        data: "sagarkumar.dev2301@gmail.com",
-                        icon: FontAwesomeIcons.envelope)
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ContactDetailTile(),
-              ],
-            ),
+            child: ContactDetailTile(),
           ),
           SizedBox(
-              height: height * 0.863309353,
-              width: width * 0.439238653,
+              width: width < 900 ? width * 1.0 : width * 0.439238653,
               child: Lottie.asset('lottie/contact_us.json')),
         ],
       ),
@@ -79,23 +48,36 @@ class ContactDetailTile extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
+          const Text(
+            "Get in touch!",
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Container(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            width: width < 900 ? width * 0.7 : width * 0.5,
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: height * 0.115107914,
-                      width: width * 0.219619327,
-                      child: TextFormField(
+                SizedBox(
+                  height: width < 900 ? height * 0.25 : height * 0.26,
+                  width: width < 900 ? width * 0.6 : width * 0.22,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextFormField(
                         decoration: customInputDecoration(
                             labeltext: "Your Name",
                             icondata: FontAwesomeIcons.user),
@@ -107,11 +89,7 @@ class ContactDetailTile extends StatelessWidget {
                           return null;
                         },
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.115107914,
-                      width: width * 0.219619327,
-                      child: TextFormField(
+                      TextFormField(
                         decoration: customInputDecoration(
                             labeltext: "Email", icondata: FontAwesomeIcons.at),
                         keyboardType: TextInputType.emailAddress,
@@ -126,48 +104,40 @@ class ContactDetailTile extends StatelessWidget {
                           return null;
                         },
                       ),
-                    ),
-                    SizedBox(
-                      height: height * 0.115107914,
-                      width: width * 0.219619327,
-                      child: TextFormField(
+                      TextFormField(
                         decoration: customInputDecoration(
                             labeltext: "Contact No.",
                             icondata: FontAwesomeIcons.idBadge),
                         keyboardType: TextInputType.number,
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
                 // const SizedBox(
                 //   width: 5,
                 // ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: height * 0.316546763,
-                      width: width * 0.197657394,
-                      child: TextFormField(
-                        expands: true,
-                        minLines: null,
-                        maxLines: null,
-                        decoration: InputDecoration(
-                            labelText: "Message",
-                            labelStyle: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                            hintText: 'Write your message here.',
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: const BorderSide(
-                                  color: Colors.indigo,
-                                  width: 1,
-                                ))),
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: width < 900 ? height * 0.25 : height * 0.26,
+                  width: width < 900 ? width * 0.6 : width * 0.2,
+                  child: TextFormField(
+                    expands: true,
+                    minLines: null,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        labelText: "Message",
+                        labelStyle: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                        hintText: 'Write your message here.',
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: const BorderSide(
+                              color: Colors.indigo,
+                              width: 1,
+                            ))),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                 ),
               ],
             ),
@@ -208,9 +178,8 @@ class ContactMeTile extends StatelessWidget {
   final IconData icon;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Container(
+      clipBehavior: Clip.hardEdge,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),

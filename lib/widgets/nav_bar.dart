@@ -1,62 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants.dart';
+import 'package:portfolio/screens/home_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class NavBar extends StatelessWidget {
+import 'nav_buttons.dart';
+
+class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
   @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  final List isHovering = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+  @override
   Widget build(BuildContext context) {
-    print(context.screenWidth);
-    return SizedBox(
-      height: 100,
+    //print(context.screenWidth);
+    return Center(
       child: Wrap(
-        spacing: context.screenWidth > 1400 ? 20 : 10,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        runAlignment: WrapAlignment.center,
+        spacing: context.screenWidth / 30,
+        alignment: WrapAlignment.center,
         children: [
-          SizedBox(
-            width: 0.10 * context.screenWidth,
-          ),
-          const Text(
-            "Sagar Kumar",
-            style: TextStyle(
-              fontSize: 40,
-              fontWeight: FontWeight.w700,
-              color: Color(0xff1b0161),
-            ),
-          ),
-          
-          NavButton(title: "About", onPressed: () {}),
-          const SizedBox(
-            width: 30,
-          ),
-          NavButton(title: "Technical Skills", onPressed: () {}),
-          const SizedBox(
-            width: 30,
-          ),
-          NavButton(title: "Projects", onPressed: () {}),
-          const SizedBox(
-            width: 30,
-          ),
-          NavButton(title: "Contact Me", onPressed: () {}),
+          NavButtons(navTitle: "Home", index: 0, isHovering: isHovering),
+          //SizedBox(width: context.screenWidth / 30),
+          NavButtons(navTitle: "About", index: 1, isHovering: isHovering),
+          //SizedBox(width: context.screenWidth / 30),
+          NavButtons(
+              navTitle: "Technical Skills", index: 2, isHovering: isHovering),
+          //SizedBox(width: context.screenWidth / 30),
+          NavButtons(navTitle: "Projects", index: 3, isHovering: isHovering),
+          //SizedBox(width: context.screenWidth / 30),
+          NavButtons(navTitle: "Contact Me", index: 4, isHovering: isHovering),
+          SizedBox(width: context.screenWidth / 30),
         ],
       ),
     );
-  }
-}
-
-class NavButton extends StatelessWidget {
-  const NavButton({required this.title, required this.onPressed, super.key});
-  final String title;
-  final Function? onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () => onPressed,
-        child: Text(
-          title,
-          style: txtNavTheme,
-        ));
   }
 }

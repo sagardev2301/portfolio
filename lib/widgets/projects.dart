@@ -7,17 +7,13 @@ class Projects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      alignment: WrapAlignment.center,
+      spacing: 30,
+      runSpacing: 30,
       children: const [
         IndividualProjects(),
-        SizedBox(
-          width: 100,
-        ),
         IndividualProjects(),
-        SizedBox(
-          width: 100,
-        ),
         IndividualProjects()
       ],
     );
