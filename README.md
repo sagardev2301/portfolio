@@ -1,16 +1,23 @@
-# portfolio
 
-A new Flutter project.
+<h1> 
+<img src = "https://user-images.githubusercontent.com/92708917/231658859-f2ffd066-47cd-47b1-80c1-69dad5361c34.gif" height = 32 width = 38/> My Personal Portfolio 
+</h1> 
+<p>
+<img src = "https://img.shields.io/aur/last-modified/portfolio" height = 20 />
+<img src = "https://img.shields.io/github/repo-size/sagardev2301/portfolio" height = 20 />
+</p>
+<h1> Description </h1>
+<p> I built this portfolio using <b> Flutter Framework </b> and will be using Firebase for its backend purposes. </p>
 
-## Getting Started
+<hr> 
+<h2> UI Demo </h2> 
 
-This project is a starting point for a Flutter application.
+<video src = "https://user-images.githubusercontent.com/92708917/231699705-779127d6-45c5-4c61-ace0-0d87a66f07b2.mp4"> </video> 
 
-A few resources to get you started if this is your first Flutter project:
+<video src = "https://user-images.githubusercontent.com/92708917/231699348-00a2a244-707d-409d-b669-f9ff9003f38e.mp4" align = "center" > </video> 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<hr> 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h1> Current Project Status </h1> 
+<img src = "https://user-images.githubusercontent.com/92708917/231703990-a47dedd6-8907-4e3e-96a6-a2f97a315290.gif", height = 150 width = 150 /> 
+
