@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/widgets/about.dart';
-import 'package:portfolio/widgets/contact_me.dart';
-import 'package:portfolio/widgets/footer.dart';
-import 'package:portfolio/widgets/nav_bar.dart';
-import 'package:portfolio/widgets/projects.dart';
-import 'package:portfolio/widgets/tech.dart';
+import 'package:portfolio/sections/about.dart';
+import 'package:portfolio/sections/contact_me.dart';
+import 'package:portfolio/sections/footer.dart';
+import 'package:portfolio/sections/nav_bar.dart';
+import 'package:portfolio/sections/projects.dart';
+import 'package:portfolio/sections/tech.dart';
 import 'package:velocity_x/velocity_x.dart';
-import '../constants.dart';
+import 'constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -32,35 +33,12 @@ class Home extends StatelessWidget {
                 child: const MainTitle(),
               ),
               actions: !isMobile ? [const NavBar()] : null,
-              // leading: isMobile
-              //     ? Builder(
-              //         builder: (BuildContext context) {
-              //           return IconButton(
-              //             icon: const Icon(
-              //               Icons.menu,
-              //               color: titleColor,
-              //               size: 44, // Changing Drawer Icon Size
-              //             ),
-              //             onPressed: () {
-              //               Scaffold.of(context).openDrawer();
-              //             },
-              //             tooltip: MaterialLocalizations.of(context)
-              //                 .openAppDrawerTooltip,
-              //           );
-              //         },
-              //       )
-              //     : null,
               elevation: 0,
               backgroundColor: Colors.transparent,
             ),
           ),
         ),
       ),
-      // drawer: isMobile
-      //     ? const Drawer(
-      //         child: Text("about"),
-      //       )
-      //     : null,
       body: SingleChildScrollView(
         child: Column(
           children: const [

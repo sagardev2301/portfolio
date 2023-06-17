@@ -59,7 +59,7 @@ class ContactDetailTile extends StatelessWidget {
             height: 20,
           ),
           Container(
-            width: width < 900 ? width * 0.7 : width * 0.5,
+            width: width < 900 ? width * 0.75 : width * 0.5,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -68,11 +68,9 @@ class ContactDetailTile extends StatelessWidget {
             child: Wrap(
               spacing: 20,
               runSpacing: 20,
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SizedBox(
-                  height: width < 900 ? height * 0.25 : height * 0.26,
+                  height: width < 900 ? height * 0.35 : height * 0.25,
                   width: width < 900 ? width * 0.6 : width * 0.22,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,11 +111,8 @@ class ContactDetailTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                // const SizedBox(
-                //   width: 5,
-                // ),
                 SizedBox(
-                  height: width < 900 ? height * 0.25 : height * 0.26,
+                  height: width < 900 ? height * 0.3 : height * 0.25,
                   width: width < 900 ? width * 0.6 : width * 0.2,
                   child: TextFormField(
                     expands: true,
@@ -136,7 +131,7 @@ class ContactDetailTile extends StatelessWidget {
                               color: Colors.indigo,
                               width: 1,
                             ))),
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
                   ),
                 ),
               ],
@@ -145,7 +140,26 @@ class ContactDetailTile extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          TextButton(onPressed: () {}, child: const Text("Submit"))
+          TextButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  // If the form is valid, display a snackbar. In the real world,
+                  // you'd often call a server or save the information in a database.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
+                }
+              },
+              style: ButtonStyle(
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(15)),
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20))),
+                  backgroundColor:
+                      const MaterialStatePropertyAll(Color(0xfff6930C3))),
+              child: const Text(
+                "Submit",
+                style: TextStyle(color: Colors.white70),
+              ))
         ],
       ),
     );
@@ -168,6 +182,8 @@ class ContactDetailTile extends StatelessWidget {
   }
 }
 
+
+/*
 class ContactMeTile extends StatelessWidget {
   const ContactMeTile({
     super.key,
@@ -200,3 +216,5 @@ class ContactMeTile extends StatelessWidget {
     );
   }
 }
+
+*/

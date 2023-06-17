@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/user_details.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -37,14 +39,21 @@ class Footer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: const [
                         FooterSocialButtons(
-                            iconData: FontAwesomeIcons.linkedin),
+                          iconData: FontAwesomeIcons.linkedin,
+                          link: linkedInUrl,
+                        ),
                         FooterSocialButtons(
-                            iconData: FontAwesomeIcons.instagram),
+                          iconData: FontAwesomeIcons.github,
+                          link: githubUrl,
+                        ),
                         FooterSocialButtons(
-                            iconData: FontAwesomeIcons.whatsapp),
+                          iconData: FontAwesomeIcons.envelope,
+                          link: emailUrl,
+                        ),
                         FooterSocialButtons(
-                            iconData: FontAwesomeIcons.envelope),
-                        FooterSocialButtons(iconData: FontAwesomeIcons.github)
+                          iconData: FontAwesomeIcons.instagram,
+                          link: instaUrl,
+                        ),
                       ],
                     ),
                   ),
@@ -101,16 +110,20 @@ class Footer extends StatelessWidget {
 
 class FooterSocialButtons extends StatelessWidget {
   const FooterSocialButtons(
-      {
-      //required this.link,
-      required this.iconData,
-      super.key});
+      {required this.link, required this.iconData, super.key});
   final IconData iconData;
-  //final String link;
+  final String link;
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: () async {
+        if (!await launchUrl(
+          Uri.parse(link),
+          mode: LaunchMode.externalApplication,
+        )) {
+          throw Exception('Could not launch $link');
+        }
+      },
       icon: Icon(
         iconData,
         size: context.screenWidth < 1000

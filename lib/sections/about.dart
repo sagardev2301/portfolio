@@ -1,11 +1,13 @@
 import 'dart:html';
-
+import 'dart:io';
+import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/constants.dart';
-import 'package:blur/blur.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../user_details.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatelessWidget {
   const About({super.key});
@@ -40,7 +42,7 @@ class AboutTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: context.screenWidth < 900 ? 500 : 600,
       width: context.screenWidth < 1000
           ? context.screenWidth < 900
@@ -58,18 +60,25 @@ class AboutTextWidget extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
+              children: const [
                 SocialButtons(
-                    icon: FontAwesomeIcons.linkedin, onPressed: () {}),
-                const SizedBox(
-                  height: 10,
+                  icon: FontAwesomeIcons.linkedin,
+                  link: linkedInUrl,
                 ),
-                SocialButtons(icon: FontAwesomeIcons.github, onPressed: () {}),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 SocialButtons(
-                    icon: FontAwesomeIcons.instagram, onPressed: () {}),
+                  icon: FontAwesomeIcons.github,
+                  link: githubUrl,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SocialButtons(
+                  icon: FontAwesomeIcons.instagram,
+                  link: instaUrl,
+                ),
               ],
             ),
             Padding(
@@ -96,7 +105,7 @@ class AboutTextWidget extends StatelessWidget {
                             child: AnimatedTextKit(
                               animatedTexts: [
                                 TypewriterAnimatedText(
-                                  'Hi, I\'m Sagar,\nFlutter Developer',
+                                  'Hi, I\'m $firstName,\n$designation',
                                   textStyle: TextStyle(
                                     fontSize: context.screenWidth < 1000
                                         ? context.screenWidth < 900
@@ -108,7 +117,7 @@ class AboutTextWidget extends StatelessWidget {
                                   speed: const Duration(milliseconds: 120),
                                 ),
                               ],
-                              totalRepeatCount: 5,
+                              totalRepeatCount: 10,
                               pause: const Duration(milliseconds: 500),
                               displayFullTextOnTap: true,
                               stopPauseOnTap: true,
@@ -120,7 +129,7 @@ class AboutTextWidget extends StatelessWidget {
                                 ? context.screenWidth * 0.7
                                 : context.screenWidth * 0.4,
                             child: Text(
-                              "3rd Year Computer Science Undergrad from Delhi Technological University (DCE formerly).\nI like to solve DSA problems, doing little bit CP (competitive programming), and as usual Computer Science grad I also have little bit knowledge of OS, DBMS, CN.",
+                              about,
                               softWrap: true,
                               style: TextStyle(
                                   fontSize: context.screenWidth < 1000
@@ -140,6 +149,7 @@ class AboutTextWidget extends StatelessWidget {
                     const AboutButtons(
                       title: "Contact",
                       iconData: FontAwesomeIcons.share,
+                      link: "",
                     ),
                     SizedBox(
                       width: context.screenWidth * 0.02,
@@ -147,6 +157,7 @@ class AboutTextWidget extends StatelessWidget {
                     const AboutButtons(
                       title: "Resume",
                       iconData: FontAwesomeIcons.download,
+                      link: resumeUrl,
                     ),
                   ]),
                 ],
@@ -254,10 +265,12 @@ class AboutButtons extends StatelessWidget {
   const AboutButtons({
     required this.title,
     required this.iconData,
+    required this.link,
     super.key,
   });
   final String title;
   final IconData iconData;
+  final String link;
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -267,8 +280,11 @@ class AboutButtons extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25),
           )),
-      onPressed: () {
-        //TODO: Implement on pressed
+      onPressed: () async {
+        if (!await launchUrl(Uri.parse(link),
+            mode: LaunchMode.externalApplication)) {
+          throw Exception('Could not launch $link');
+        }
       },
       child: Row(children: [
         Text(
@@ -289,21 +305,29 @@ class AboutButtons extends StatelessWidget {
 }
 
 class SocialButtons extends StatelessWidget {
-  const SocialButtons({required this.icon, required this.onPressed, super.key});
+  const SocialButtons({required this.icon, required this.link, super.key});
   final IconData icon;
-  final Function onPressed;
+  final String link;
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () => onPressed,
-        style: TextButton.styleFrom(
-            padding: const EdgeInsets.all(20),
-            shape: const CircleBorder(),
-            backgroundColor: primaryColor),
-        child: Icon(
-          icon,
-          size: 30,
-          color: Colors.black,
-        ));
+      onPressed: () async {
+        if (!await launchUrl(
+          Uri.parse(link),
+          mode: LaunchMode.externalApplication,
+        )) {
+          throw Exception('Could not launch $link');
+        }
+      },
+      style: TextButton.styleFrom(
+          padding: const EdgeInsets.all(20),
+          shape: const CircleBorder(),
+          backgroundColor: primaryColor),
+      child: Icon(
+        icon,
+        size: 30,
+        color: Colors.black,
+      ),
+    );
   }
 }
